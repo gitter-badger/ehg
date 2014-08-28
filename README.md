@@ -1,4 +1,4 @@
 ehg
 ===
 
-General API for reading E-Hentai User Galleries
+General API for reading E-Hentai Galleries
