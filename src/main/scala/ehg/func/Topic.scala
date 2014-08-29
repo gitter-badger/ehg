@@ -18,6 +18,7 @@ object TopicUri extends EhgUri[EhgKeyPaged] {
 	}
 
 	def input(u: Uri) = allCatch opt {
+		u.ensuring(check _)
 		val paths: Seq[String] = u.path
 		paths(0).ensuring(_ == "g")
 		val id = paths(1).toInt

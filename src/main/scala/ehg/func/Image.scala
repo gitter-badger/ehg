@@ -14,6 +14,7 @@ object ImageUri extends EhgUri[EhgImageKey] {
 	}
 
 	def input(uri: Uri) = allCatch opt {
+		uri.ensuring(check _)
 		val paths: Seq[String] = uri.path
 		paths(0).ensuring(_ == "s")
 		val token = paths(1)
