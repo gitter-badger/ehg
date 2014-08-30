@@ -14,8 +14,7 @@ trait EhgImageEnv { self: EhgEnv =>
 			host/"s"/token/s"$id-$page"
 		}
 
-		def input(uri: Uri) = allCatch opt {
-			uri.ensuring(checkHost _)
+		protected def in(uri: Uri) = allCatch opt {
 			val paths: Seq[String] = uri.path
 			paths(0).ensuring(_ == "s")
 			val token = paths(1)

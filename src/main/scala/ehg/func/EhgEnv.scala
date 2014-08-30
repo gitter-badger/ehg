@@ -3,7 +3,7 @@ package ehg.func
 import spray.http.Uri
 import util.UriUtil._
 
-trait EhgEnv {
+class EhgEnv {
 	protected val host: Uri = http/"g.e-hentai.org"
 
 	protected def checkHost(u: Uri): Boolean = {
@@ -13,7 +13,9 @@ trait EhgEnv {
 
 	protected abstract class EhgUri[Input] {
 		def uri(input: Input): Option[Uri]
-		def input(uri: Uri): Option[Input]
+		protected def in(uri: Uri): Option[Input]
+
+		def input(uri: Uri) = if (checkHost(uri)) in(uri) else None
 		def unapply(uri: Uri) = input(uri)
 	}
 }

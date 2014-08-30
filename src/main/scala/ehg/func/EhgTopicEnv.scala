@@ -18,8 +18,7 @@ trait EhgTopicEnv { self: EhgEnv =>
 			host/"g"/s"${key.id}"/key.token/?p
 		}
 
-		def input(u: Uri) = allCatch opt {
-			u.ensuring(checkHost _)
+		protected def in(u: Uri) = allCatch opt {
 			val paths: Seq[String] = u.path
 			paths(0).ensuring(_ == "g")
 			val id = paths(1).toInt
