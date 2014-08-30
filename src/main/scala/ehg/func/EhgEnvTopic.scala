@@ -10,7 +10,7 @@ import c.{mutable => m}
 import scala.util.control.Exception._
 import scala.xml._
 
-trait EhgTopicEnv { self: EhgEnv =>
+trait EhgEnvTopic { self: EhgEnv =>
 	object TopicUri extends EhgUri[EhgKeyPaged] {
 		def uri(k: EhgKeyPaged) = allCatch opt {
 			import k._

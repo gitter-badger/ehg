@@ -7,7 +7,7 @@ import spray.http.Uri
 import scala.util.control.Exception._
 import scala.xml._
 
-trait EhgIndexEnv { self: EhgEnv =>
+trait EhgEnvIndex { self: EhgEnv =>
 	//object IndexUri extends EhgUri {
 	//
 	//}

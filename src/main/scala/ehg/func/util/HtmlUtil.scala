@@ -7,14 +7,16 @@ object HtmlUtil {
 		case "" => None
 		case st => Some(st)
 	}
+	
+	def toAttr(name: String): String = "@" + name
 
 	def hasAttr(name: String, text: String): NodeSeq => Boolean = {
-		(_: NodeSeq) \ s"@$name" contains Text(text)
+		(_: NodeSeq) \ toAttr(name) contains Text(text)
 	}
 
 	implicit class NodeSeqOp(val n: NodeSeq) extends AnyVal {
 		def textOp: Option[String] = str2op(n.text)
-		def \@(s: String) = n \ s"@$s"
-		def \\@(s: String) = n \\ s"@$s"
+		def \@(attr: String) = n \ toAttr(attr)
+		def \\@(attr: String) = n \\ toAttr(attr)
 	}
 }

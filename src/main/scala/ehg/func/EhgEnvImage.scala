@@ -7,7 +7,7 @@ import util.UriUtil._
 import scala.util.control.Exception._
 import scala.xml._
 
-trait EhgImageEnv { self: EhgEnv =>
+trait EhgEnvImage { self: EhgEnv =>
 	object ImageUri extends EhgUri[EhgImageKey] {
 		def uri(k: EhgImageKey) = allCatch opt {
 			import k._
