@@ -26,6 +26,9 @@ case class EhgTag(key: String, value: String)
 case class EhgUser(name: String)
 case class EhgCategory(name: String)
 
-trait EhgReader[A] {
-	def apply(k: A): Seq[Ehg]
+trait EhgReader {
+	trait Read[A] {
+		def apply(k: A): Seq[Ehg]
+	}
+	def apply[A](k: A)(implicit read: this.Read[A]) = read(k)
 }
