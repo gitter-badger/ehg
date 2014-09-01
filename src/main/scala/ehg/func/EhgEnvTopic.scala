@@ -2,7 +2,6 @@ package ehg.func
 
 import util.HtmlUtil._
 import util.UriUtil._
-import ehg.api._
 import spray.http.Uri
 
 import scala.{collection => c}
@@ -10,12 +9,12 @@ import c.{mutable => m}
 import scala.util.control.Exception._
 import scala.xml._
 
-trait EhgEnvTopic { self: EhgEnv =>
-	object TopicUri extends EhgUri[EhgKeyPaged] {
-		def uri(k: EhgKeyPaged) = allCatch opt {
+trait EhgEnvTopic { env: EhgEnv =>
+	object TopicUri extends EhgUri[EhgKey] {
+		def apply(k: EhgKey) = allCatch opt {
 			import k._
 			val p: Uri.Query = Map("p" -> s"$page")
-			host/"g"/s"${key.id}"/key.token/?p
+			root/"g"/s"$id"/token/?p
 		}
 
 		protected def in(u: Uri) = allCatch opt {
@@ -24,7 +23,7 @@ trait EhgEnvTopic { self: EhgEnv =>
 			val id = paths(1).toInt
 			val token = paths(2)
 			val page = u.query.get("p").map(_.toInt).getOrElse(0)
-			EhgKeyPaged(EhgKey(id, token), page)
+			EhgKey(id, token, page)
 		}
 	}
 
@@ -82,11 +81,10 @@ trait EhgEnvTopic { self: EhgEnv =>
 	}
 }
 
-
-case class EhgKeyPaged(key: EhgKey, page: Int) {
-	key.id.ensuring(_ >= 0)
-	key.token.ensuring(t => t.length == 10 && t.matches("""\w+"""))
+case class EhgKey(id: Int, token: String, page: Int) {
+	id.ensuring(_ >= 0)
+	token.ensuring(t => t.length == 10 && t.matches("""\w+"""))
 	page.ensuring(_ >= 0)
 }
 
-case class ImgLink(uri: String, index: Int, name: String)
+case class ImgLink(uri: Uri, index: Int, name: String)

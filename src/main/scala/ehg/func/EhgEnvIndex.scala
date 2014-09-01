@@ -7,7 +7,7 @@ import spray.http.Uri
 import scala.util.control.Exception._
 import scala.xml._
 
-trait EhgEnvIndex { self: EhgEnv =>
+trait EhgEnvIndex { env: EhgEnv =>
 	//object IndexUri extends EhgUri {
 	//
 	//}
@@ -23,4 +23,4 @@ trait EhgEnvIndex { self: EhgEnv =>
 	}
 }
 
-case class TopicLink(url: String, title: String)
+case class TopicLink(url: Uri, title: String)

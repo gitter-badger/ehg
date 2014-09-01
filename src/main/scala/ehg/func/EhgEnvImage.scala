@@ -7,11 +7,11 @@ import util.UriUtil._
 import scala.util.control.Exception._
 import scala.xml._
 
-trait EhgEnvImage { self: EhgEnv =>
-	object ImageUri extends EhgUri[EhgImageKey] {
-		def uri(k: EhgImageKey) = allCatch opt {
+trait EhgEnvImage { env: EhgEnv =>
+	object ImageUri extends EhgUri[EhgKey] {
+		def apply(k: EhgKey) = allCatch opt {
 			import k._
-			host/"s"/token/s"$id-$page"
+			root/"s"/token/s"$id-$page"
 		}
 
 		protected def in(uri: Uri) = allCatch opt {
@@ -21,7 +21,7 @@ trait EhgEnvImage { self: EhgEnv =>
 			val idpage = paths(2).split("-")
 			val id: Int = idpage(0).toInt
 			val page: Int = idpage(1).toInt
-			EhgImageKey(id, token, page)
+			EhgKey(id, token, page)
 		}
 	}
 
@@ -51,8 +51,3 @@ trait EhgEnvImage { self: EhgEnv =>
 	}
 }
 
-case class EhgImageKey(id: Int, token: String, page: Int) {
-	id.ensuring(_ >= 0)
-	token.ensuring(t => t.length == 10 && t.matches("""\w+"""))
-	page.ensuring(_ >= 0)
-}

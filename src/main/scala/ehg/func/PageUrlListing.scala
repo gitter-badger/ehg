@@ -2,6 +2,7 @@ package ehg.func
 
 import scala.xml._
 import util.HtmlUtil._
+import spray.http.Uri
 
 trait PageUrlListing {
 	val html: Node
@@ -19,7 +20,7 @@ trait PageUrlListing {
 		} get
 	}
 
-	val pages: Map[Int, String] = {
+	val pages: Map[Int, Uri] = {
 		pagetds map { lnk =>
 			val PageLink(num, url) = findtd(lnk)
 			(num, url)
@@ -30,9 +31,9 @@ trait PageUrlListing {
 		pagetds find hasAttr("class", "ptds") map findtd get
 	}
 
-	val next: Option[String] = {
+	val next: Option[Uri] = {
 		pages get current.num + 1
 	}
 }
 
-case class PageLink(num: Int, url: String)
+case class PageLink(num: Int, url: Uri)
