@@ -1,9 +1,9 @@
-package ehg.func
+package ehg.func.uri
 
+import ehg.func.uri.UriUtil._
 import spray.http.Uri
-import util.UriUtil._
 
-trait EhgEnv { env =>
+trait EhgUriBuilder { env =>
 	val root: Uri = http/"g.e-hentai.org"
 
 	protected def checkRoot(u: Uri) = {

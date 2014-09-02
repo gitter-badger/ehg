@@ -1,4 +1,4 @@
-package ehg.func.util
+package ehg.func.html
 
 import scala.xml._
 

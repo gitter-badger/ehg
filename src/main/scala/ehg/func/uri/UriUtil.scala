@@ -1,4 +1,4 @@
-package ehg.func.util
+package ehg.func.uri
 
 import spray.http.Uri
 import spray.http.Uri._

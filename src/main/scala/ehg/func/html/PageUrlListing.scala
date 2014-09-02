@@ -1,8 +1,9 @@
-package ehg.func
+package ehg.func.html
+
+import ehg.func.html.HtmlUtil._
+import spray.http.Uri
 
 import scala.xml._
-import util.HtmlUtil._
-import spray.http.Uri
 
 trait PageUrlListing {
 	val html: Node
