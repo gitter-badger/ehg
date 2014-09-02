@@ -1,6 +1,6 @@
 package ehg
 
-private object Foo {
+private[ehg] object Foo {
 	type Image = Array[Byte]
 }
 
