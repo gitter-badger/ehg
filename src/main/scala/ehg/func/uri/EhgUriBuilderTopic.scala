@@ -1,6 +1,6 @@
 package ehg.func.uri
 
-import ehg.func.uri.UriUtil._
+import UriUtil._
 import spray.http.Uri
 
 import scala.util.control.Exception._
